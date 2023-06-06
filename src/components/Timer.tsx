@@ -1,15 +1,17 @@
 import { Box, Button, Grid } from "@mui/material"
 import { useState, useEffect } from 'react'
+import { Watch } from "./Watch";
 
 
 export const Timer = () => {
-    const [seconds, setSeconds] = useState(1500);
+    const [seconds, setSeconds] = useState<number>(1500);
     const [start, setStart] = useState(false);
     const [short, setShort] = useState(false);
     const [long, setLong] = useState(false);
     const [pomodoro, setPomodoro] = useState(false);
 
     useEffect(() => {
+        //if no params, only launch once. If you pass params, when the variables change, it renders
         let timer: any = null;
         if (start) {
             timer = setInterval(() => {
@@ -29,22 +31,21 @@ export const Timer = () => {
 
     }, [start, seconds]); //que es este arreglo al final? se puede usar un objeto vacio tambien? o otro tipo de data collection?
 
-    const formatTime = (totalSeconds: any) => {
+    // const formatTime = (totalSeconds: number) => {
 
-        const minutes = Math.floor(totalSeconds / 60);
+    //     const minutes = Math.floor(totalSeconds / 60);
 
-        const seconds = totalSeconds % 60;
+    //     const seconds = totalSeconds % 60;
 
-        return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
-    }
+    //     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+    // }
 
     const toggle = () => {
         setStart(!start);
     }
 
-    const setTimer = (seconds: any) => {
+    const setTimer = (seconds: number) => {
         setSeconds(seconds)
-        formatTime(seconds)
     }
 
     const disableButtons = () => {
@@ -70,13 +71,11 @@ export const Timer = () => {
     return (
         <Grid xs={12} justifyContent={"center"}>
             <Grid xs={12} justifyContent={"space-between"}>
-                <Button variant={seconds !== 1500 ? "contained" : "outlined"} disabled={pomodoro} onClick={() => { setTimer(1500); toggle() }}>Pomodoro</Button>
-                <Button variant={seconds !== 300 ? "contained" : "outlined"} disabled={short} onClick={() => { setTimer(300); toggle }}>Short Break</Button>
-                <Button variant={seconds !== 900 ? "contained" : "outlined"} disabled={long} onClick={() => { setTimer(900); toggle }}>long Break</Button>
+                <Button variant="contained" disabled={pomodoro} onClick={() => { setTimer(1500) }}>Pomodoro</Button>
+                <Button variant="contained" disabled={short} onClick={() => { setTimer(300) }}>Short Break</Button>
+                <Button variant="contained" disabled={long} onClick={() => { setTimer(900) }}>long Break</Button>
             </Grid>
-            <Grid xs={12} >
-                <Box component="span" ><h1>Timer</h1><p>{formatTime(seconds)}</p></Box>
-            </Grid>
+            <Watch seconds={seconds} />
             <Grid>
                 <Button variant="contained" onClick={toggle}>{!start ? 'Start' : 'Pause'}</Button>
             </Grid>
