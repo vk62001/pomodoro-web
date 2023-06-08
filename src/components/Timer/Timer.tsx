@@ -1,6 +1,6 @@
 import { Box, Button, Grid } from "@mui/material"
 import { useState, useEffect } from 'react'
-import { Watch } from "../Watch";
+import { Watch } from "../Watch/Watch";
 import './Timer.css'
 import { Options } from "../Options/Options";
 
@@ -9,6 +9,8 @@ export const Timer = () => {
     const [seconds, setSeconds] = useState<number>(0);
     const [start, setStart] = useState(false);
     const [mode, setMode] = useState(0);
+    const [resetClicked, setResetClicked] = useState(false);
+    const [startClicked, setStartClicked] = useState(false);
 
 
     useEffect(() => {
@@ -57,23 +59,33 @@ export const Timer = () => {
 
 
     return (
-        <Grid xs={12} justifyContent={"center"}>
-            <Grid xs={12} justifyContent={"space-between"}>
-                <Options disable={mode === 300 || mode === 900} timerSetter={timerSetter} option={"Pomodoro"} seconds={1500} />
-                <Options disable={mode === 1500 || mode === 900} timerSetter={timerSetter} option={"Short Break"} seconds={300} />
-                <Options disable={mode === 300 || mode === 1500} timerSetter={timerSetter} option={"Long Break"} seconds={900} />
-            </Grid>
+        // <Grid xs={12} justifyContent={"center"} className="timer">
+        //     <Grid xs={12} justifyContent={"space-between"} className="options">
+        <div className="timer">
+
+
+            <div className="options">
+                <div >
+                    <Options disable={mode === 300 || mode === 900} timerSetter={timerSetter} option={"Pomodoro"} seconds={1500} />
+                </div>
+                <div>
+                    <Options disable={mode === 1500 || mode === 900} timerSetter={timerSetter} option={"Short Break"} seconds={300} />
+                </div>
+                <div>
+                    <Options disable={mode === 300 || mode === 1500} timerSetter={timerSetter} option={"Long Break"} seconds={900} />
+                </div>
+            </div>
+            {/* </Grid> */}
             <Watch seconds={seconds} />
-            <Grid>
-                <Button variant="contained" onClick={toggle}>{!start ? 'Start' : 'Pause'}</Button>
-                <Button variant="contained" onClick={() => { setSeconds(0); setMode(0) }}>Reset</Button>
-            </Grid>
+            {/* // <Grid> */}
+            <div className="buttons">
+                <button className={!startClicked ? "button reset" : "button-clicked"} onClick={() => { toggle(); setStartClicked(!startClicked) }}>{!start ? 'Start' : 'Pause'}</button>
+                <button className={!resetClicked ? "button reset" : "button-clicked"} onClick={() => { setSeconds(0); setMode(0); setResetClicked(!resetClicked); setStartClicked(false) }}>Reset</button>
+            </div>
+            {/* // </Grid> */}
 
 
-            {/* 3 options */}
-            {/* {watch} */}
-            {/* button  */}
+        </div>
 
-        </Grid>
     )
 }

@@ -1,4 +1,5 @@
 import { Box, Grid } from "@mui/material"
+import './Watch.css'
 
 interface IWatch {
     seconds: number,
@@ -16,6 +17,6 @@ export const Watch = ({ seconds }: IWatch) => {
     }
     return (
         <Grid xs={12} >
-            <Box component="span" ><h1>Timer</h1><p>{formatTime(seconds)}</p></Box>
+            <Box component="span" ><p className="watch">{formatTime(seconds)}</p></Box>
         </Grid>)
 }
