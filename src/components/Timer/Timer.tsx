@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Watch } from "../Watch/Watch";
 import './Timer.css'
 import { Options } from "../Options/Options";
-import Click from '../../assets/sounds/click.wav'
+import Click from '../../assets/sounds/click.mp3'
 import TimeOver from '../../assets/sounds/time_over.wav'
 
 interface IWatch {
@@ -13,7 +13,7 @@ export const Timer = ({ bgColour }: IWatch) => {
     const [seconds, setSeconds] = useState<number>(1500);
     const [start, setStart] = useState<boolean>(false);
     /**mode: controls behaviour on options picked. (cannot use seconds as it change, but mode keeps the value until another choice is picked)*/
-    const [mode, setMode] = useState<number>(0);
+    const [mode, setMode] = useState<number>(1500);
 
     /** These both controls style changes on button click rather than functionality*/
     const [resetClicked, setResetClicked] = useState<boolean>(false);
@@ -33,6 +33,7 @@ export const Timer = ({ bgColour }: IWatch) => {
         }
 
         if (start) {
+
             timer = setInterval(() => {
                 setSeconds(seconds - 1)
             }, 10);
@@ -44,7 +45,6 @@ export const Timer = ({ bgColour }: IWatch) => {
         }
 
         return () => clearInterval(timer);
-
 
     }, [start, seconds]); //que es este arreglo al final? se puede usar un objeto vacio tambien? o otro tipo de data collection?
 
@@ -106,11 +106,11 @@ export const Timer = ({ bgColour }: IWatch) => {
             </div>
             <Watch seconds={seconds} />
             <div className="buttons">
-                <button disabled={seconds === 0} className={startClicked ? "button-clicked" : "button start"} onClick={startSetter}>{!start ? 'Start' : 'Pause'}</button>
+                <button disabled={seconds === 0} className={`${startClicked ? 'button-clicked' : 'button reset'} ${seconds === 0 ? 'disabled' : ''}`} onClick={startSetter}>{!start ? 'Start' : 'Pause'}</button>
                 <button
                     className={resetClicked ? "button-clicked" : "button reset"}
                     onClick={reset}>
-                    Reset
+                    Restart
                 </button>
             </div>
         </div>

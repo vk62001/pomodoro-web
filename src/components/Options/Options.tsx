@@ -14,7 +14,7 @@ export const Options = ({ timerSetter, option, seconds, styling }: IOptions) => 
     }
 
     return (
-        <>
+        <div className='option'>
             <button className={styling} onClick={() => toggle()}>{option}</button>
-        </>)
+        </div>)
 }

@@ -29,12 +29,12 @@
     border-radius: 4px;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 20px;
-    padding:    2px 12px;
-    height: 28px;
+    padding: 10px 15px;
     cursor: pointer;
     background: none;
     box-shadow: none;
     font-weight: 300;
+
 }
 
 .button-clicked{
@@ -43,12 +43,15 @@
     border-radius: 4px;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 20px;
-    padding: 2px 12px;
-    height: 28px;
+    padding: 10px 15px;
     cursor: pointer;
     background: none rgba(0, 0, 0, 0.15);
     box-shadow: none;
     color: white;
     opacity: 1;
     font-weight: bold;
+}
+
+.disabled{
+    text-decoration-line: line-through;
 }
