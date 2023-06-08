@@ -1,4 +1,3 @@
-import { Box, Button, Grid } from "@mui/material"
 import { useState, useEffect } from 'react'
 import { Watch } from "../Watch/Watch";
 import './Timer.css'
@@ -19,7 +18,7 @@ export const Timer = () => {
 
         if (seconds === 0 && start) {
             clearInterval(timer)
-            toggle()
+            setStart(!start);
             // setSeconds(1)
             // setSeconds(seconds) TODO: update to the right choice
 
@@ -42,11 +41,6 @@ export const Timer = () => {
 
     }, [start, seconds]); //que es este arreglo al final? se puede usar un objeto vacio tambien? o otro tipo de data collection?
 
-
-    const toggle = () => {
-        setStart(!start);
-    }
-
     const timerSetter = (seconds: number) => {
         setSeconds(seconds)
         setMode(seconds)
@@ -57,13 +51,23 @@ export const Timer = () => {
         }
     }
 
+    const reset = () => {
+        setSeconds(0);
+        setResetClicked(true);
+        setMode(0);
+        setStartClicked(false);
+        setTimeout(() => {
+            setResetClicked(false);
+        }, 1000);
+    }
+
+    const startSetter = () => {
+        setStart(!start);
+        setStartClicked(!startClicked);
+    }
 
     return (
-        // <Grid xs={12} justifyContent={"center"} className="timer">
-        //     <Grid xs={12} justifyContent={"space-between"} className="options">
         <div className="timer">
-
-
             <div className="options">
                 <div >
                     <Options disable={mode === 300 || mode === 900} timerSetter={timerSetter} option={"Pomodoro"} seconds={1500} />
@@ -75,16 +79,15 @@ export const Timer = () => {
                     <Options disable={mode === 300 || mode === 1500} timerSetter={timerSetter} option={"Long Break"} seconds={900} />
                 </div>
             </div>
-            {/* </Grid> */}
             <Watch seconds={seconds} />
-            {/* // <Grid> */}
             <div className="buttons">
-                <button className={!startClicked ? "button reset" : "button-clicked"} onClick={() => { toggle(); setStartClicked(!startClicked) }}>{!start ? 'Start' : 'Pause'}</button>
-                <button className={!resetClicked ? "button reset" : "button-clicked"} onClick={() => { setSeconds(0); setMode(0); setResetClicked(!resetClicked); setStartClicked(false) }}>Reset</button>
+                <button className={startClicked && mode !== 0 ? "button-clicked" : "button start"} onClick={startSetter}>{!start ? 'Start' : 'Pause'}</button>
+                <button
+                    className={resetClicked ? "button-clicked" : "button reset"}
+                    onClick={reset}>
+                    Reset
+                </button>
             </div>
-            {/* // </Grid> */}
-
-
         </div>
 
     )

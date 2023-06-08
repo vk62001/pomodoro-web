@@ -1,4 +1,3 @@
-import { Grid } from "@mui/material"
 import { Header } from "./Header"
 import { Todo } from "./Todo"
 import { Timer } from "./Timer/Timer"
@@ -8,7 +7,9 @@ export const Pomodoro = () => {
     return (
         <>
             <Header />
-            <Timer />
+            <div className="timer-container">
+                <Timer />
+            </div>
             <Todo />
         </>
     )
