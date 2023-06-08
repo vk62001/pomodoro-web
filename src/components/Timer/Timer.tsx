@@ -3,8 +3,11 @@ import { Watch } from "../Watch/Watch";
 import './Timer.css'
 import { Options } from "../Options/Options";
 
+interface IWatch {
+    bgColour: any
+}
 
-export const Timer = () => {
+export const Timer = ({ bgColour }: IWatch) => {
     const [seconds, setSeconds] = useState<number>(0);
     const [start, setStart] = useState(false);
     const [mode, setMode] = useState(0);
@@ -19,9 +22,6 @@ export const Timer = () => {
         if (seconds === 0 && start) {
             clearInterval(timer)
             setStart(!start);
-            // setSeconds(1)
-            // setSeconds(seconds) TODO: update to the right choice
-
             return;
         }
 
@@ -45,6 +45,16 @@ export const Timer = () => {
         setSeconds(seconds)
         setMode(seconds)
 
+        if (seconds === 300) {
+            bgColour("bg-short")
+        } else if (seconds === 1500) {
+            bgColour("bg-pomo")
+
+        } else if (seconds === 900) {
+            bgColour("bg-long")
+
+        }
+
         if (seconds === 1500 || seconds === 900 || seconds === 300) {
             // this is to make the start button to reset when clicked on a button a second time
             setStart(false)
@@ -58,30 +68,33 @@ export const Timer = () => {
         setStartClicked(false);
         setTimeout(() => {
             setResetClicked(false);
-        }, 1000);
+        }, 200);
     }
 
     const startSetter = () => {
         setStart(!start);
-        setStartClicked(!startClicked);
+        setStartClicked(true);
+        setTimeout(() => {
+            setStartClicked(false);
+        }, 200);
     }
 
     return (
         <div className="timer">
             <div className="options">
                 <div >
-                    <Options disable={mode === 300 || mode === 900} timerSetter={timerSetter} option={"Pomodoro"} seconds={1500} />
+                    <Options styling={mode === 1500 ? "button-clicked" : "button"} timerSetter={timerSetter} option={"Pomodoro"} seconds={1500} />
                 </div>
                 <div>
-                    <Options disable={mode === 1500 || mode === 900} timerSetter={timerSetter} option={"Short Break"} seconds={300} />
+                    <Options styling={mode === 300 ? "button-clicked" : "button"} timerSetter={timerSetter} option={"Short Break"} seconds={300} />
                 </div>
                 <div>
-                    <Options disable={mode === 300 || mode === 1500} timerSetter={timerSetter} option={"Long Break"} seconds={900} />
+                    <Options styling={mode === 900 ? "button-clicked" : "button"} timerSetter={timerSetter} option={"Long Break"} seconds={900} />
                 </div>
             </div>
             <Watch seconds={seconds} />
             <div className="buttons">
-                <button className={startClicked && mode !== 0 ? "button-clicked" : "button start"} onClick={startSetter}>{!start ? 'Start' : 'Pause'}</button>
+                <button className={startClicked ? "button-clicked" : "button start"} onClick={startSetter}>{!start ? 'Start' : 'Pause'}</button>
                 <button
                     className={resetClicked ? "button-clicked" : "button reset"}
                     onClick={reset}>

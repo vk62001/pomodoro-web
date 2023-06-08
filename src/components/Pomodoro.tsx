@@ -3,14 +3,18 @@ import { Todo } from "./Todo"
 import { Timer } from "./Timer/Timer"
 import './styles.css'
 
-export const Pomodoro = () => {
+interface IPomodoro {
+    bgColour: any
+}
+
+export const Pomodoro = ({ bgColour }: IPomodoro) => {
     return (
-        <>
+        <div className="pomodoro">
             <Header />
             <div className="timer-container">
-                <Timer />
+                <Timer bgColour={bgColour} />
             </div>
             <Todo />
-        </>
+        </div>
     )
 }

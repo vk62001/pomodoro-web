@@ -1,14 +1,13 @@
-import { useEffect, useState } from 'react'
-import { Button } from "@mui/material"
+import '../Timer/Timer.css'
 
 interface IOptions {
     timerSetter: any
     option: string
     seconds: number
-    disable: boolean
+    styling: string
 }
 
-export const Options = ({ timerSetter, option, seconds, disable }: IOptions) => {
+export const Options = ({ timerSetter, option, seconds, styling }: IOptions) => {
 
     const toggle = () => {
         timerSetter(seconds);
@@ -16,6 +15,6 @@ export const Options = ({ timerSetter, option, seconds, disable }: IOptions) => 
 
     return (
         <>
-            <Button disabled={disable} variant="contained" onClick={() => toggle()}>{option}</Button>
+            <button className={styling} onClick={() => toggle()}>{option}</button>
         </>)
 }

@@ -6,3 +6,8 @@
     display: flex;
     justify-content: center;
 }
+
+.pomodoro{
+    width: 40vw;
+
+}
