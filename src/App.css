@@ -15,7 +15,6 @@ body {
     height: 100%;
     margin: 0%;
     padding: 0%;
-
 }
 
 .app {
@@ -37,6 +36,5 @@ body {
 
 .bg-long {
     background: #1687a7; 
-
     transition: background-color 0.5s ease-in-out 0s;
 }
