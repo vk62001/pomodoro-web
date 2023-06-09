@@ -1,4 +1,5 @@
 import '../Timer/Timer.css'
+import '../styles.css'
 
 interface IOptions {
     timerSetter: any
@@ -15,6 +16,6 @@ export const Options = ({ timerSetter, option, seconds, styling }: IOptions) => 
 
     return (
         <div className='option'>
-            <button className={styling} onClick={() => toggle()}>{option}</button>
+            <button className={styling} onClick={() => toggle()}><label className='buttons-text'>{option}</label></button>
         </div>)
 }

@@ -19,10 +19,13 @@ export const Timer = ({ bgColour }: IWatch) => {
     const [resetClicked, setResetClicked] = useState<boolean>(false);
     const [startClicked, setStartClicked] = useState<boolean>(false);
 
+    const [width, setWidth] = useState(window.innerWidth);
+
 
     useEffect(() => {
         //if no params, only launch once. If you pass params, when the variables change, it renders
         let timer: any = null;
+        console.log(document.body.clientWidth)
 
         //clear timer when we click in an option and set start to false
         if (seconds === 0 && start) {
@@ -36,7 +39,7 @@ export const Timer = ({ bgColour }: IWatch) => {
 
             timer = setInterval(() => {
                 setSeconds(seconds - 1)
-            }, 10);
+            }, 1000);
 
 
         } else if (!start || seconds !== 0) {
@@ -47,6 +50,31 @@ export const Timer = ({ bgColour }: IWatch) => {
         return () => clearInterval(timer);
 
     }, [start, seconds]); //que es este arreglo al final? se puede usar un objeto vacio tambien? o otro tipo de data collection?
+
+
+
+    useEffect(() => {
+        function handleWindowResize() {
+            setWindowSize(getWindowSize());
+            console.log(windowSize)
+        }
+
+        window.addEventListener('resize', handleWindowResize);
+
+        return () => {
+            window.removeEventListener('resize', handleWindowResize);
+        };
+    }, []);
+
+
+
+    const getWindowSize = () => {
+        const { innerWidth, innerHeight } = window;
+        return { innerWidth, innerHeight };
+    }
+
+    const [windowSize, setWindowSize] = useState(getWindowSize());
+
 
     const timerSetter = (seconds: number): void => {
         setSeconds(seconds)
@@ -95,13 +123,13 @@ export const Timer = ({ bgColour }: IWatch) => {
         <div className="timer">
             <div className="options">
                 <div >
-                    <Options styling={mode === 1500 ? "button-clicked" : "button"} timerSetter={timerSetter} option={"Pomodoro"} seconds={1500} />
+                    <Options styling={mode === 1500 ? "button-clicked" : "button"} timerSetter={timerSetter} option={windowSize.innerWidth > 920 ? "Pomodoro" : "Pomo"} seconds={1500} />
                 </div>
                 <div>
-                    <Options styling={mode === 300 ? "button-clicked" : "button"} timerSetter={timerSetter} option={"Short Break"} seconds={300} />
+                    <Options styling={mode === 300 ? "button-clicked" : "button"} timerSetter={timerSetter} option={windowSize.innerWidth > 920 ? "Short Break" : "Short"} seconds={300} />
                 </div>
                 <div>
-                    <Options styling={mode === 900 ? "button-clicked" : "button"} timerSetter={timerSetter} option={"Long Break"} seconds={900} />
+                    <Options styling={mode === 900 ? "button-clicked" : "button"} timerSetter={timerSetter} option={windowSize.innerWidth > 920 ? "Long Break" : "Long"} seconds={900} />
                 </div>
             </div>
             <Watch seconds={seconds} />
