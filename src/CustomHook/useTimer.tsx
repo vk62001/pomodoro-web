@@ -13,12 +13,13 @@ const useTimer = (initialTime: number = 0) => {
 
   const startTimer = () => {
     timerId = setInterval(() => {
+      // const  prevtime = time+1;
+      // setTime(prevtime)
       setTime((prevTime) => prevTime + 1);
     }, 1000);
   };
 
   useEffect(() => {
-    
     if (isRunning) {
       startTimer();
     } else {
