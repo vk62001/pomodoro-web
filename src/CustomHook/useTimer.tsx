@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 
-const useTimer = (initialTime: number = 0) => {
+const useTimer = (initialTime: number = 1500) => {
   const [time, setTime] = useState<number>(initialTime);
-  const [isRunning, setIsRunning] = useState<boolean>(true);
-  
+  const [isRunning, setIsRunning] = useState<boolean>(false);
+
   let timerId: ReturnType<typeof setInterval>;
 
   const stopTimer = () => {
@@ -15,7 +15,7 @@ const useTimer = (initialTime: number = 0) => {
     timerId = setInterval(() => {
       // const  prevtime = time+1;
       // setTime(prevtime)
-      setTime((prevTime) => prevTime + 1);
+      setTime((prevTime) => prevTime - 1);
     }, 1000);
   };
 
@@ -31,7 +31,7 @@ const useTimer = (initialTime: number = 0) => {
     };
   }, [initialTime, isRunning]);
 
-  return { time, isRunning, setIsRunning, stopTimer };
+  return { time, isRunning, setIsRunning, stopTimer, setTime };
 };
 
 export default useTimer;

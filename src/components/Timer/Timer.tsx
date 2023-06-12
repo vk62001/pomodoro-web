@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Watch } from "../Watch/Watch";
 import './Timer.css'
-import { Options } from "../Options/Options";
+import { Options } 
+
+
+from "../Options/Options";
 import Click from '../../assets/sounds/click.mp3'
 import TimeOver from '../../assets/sounds/time_over.wav'
 
