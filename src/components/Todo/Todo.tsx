@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import useTimer from '../CustomHook/useTimer';
-import { Input } from './Input/Input';
-import { getArray, setCacheArray, deleteItem } from '../cache/cache';
-
+import { Input } from '../Input/Input';
+import { getArray, setCacheArray, deleteItem } from '../../cache/cache';
+import './Todo.css'
 
 export const Todo = () => {
 
@@ -57,23 +56,23 @@ export const Todo = () => {
     const renderTodos = () => {
         if (Object.keys(todos).length === 0) return;
         return todos.map((e: any) => (
-            <li key={e.id}>
-                {e.task}<button onClick={() => deleteTask(e.id)}>Delete</button>
+            <li className='list-item' key={e.id}>
+                <p className='text-list'>{e.task}</p><button className='todo-buttons' onClick={() => deleteTask(e.id)}>Delete</button>
             </li>
         ));
     }
 
     return (
         <>
-            <div>Todo</div>
-
-            <Input
-                placeholder='Add name new task'
+            <h1>Tasks</h1>
+            <div className='add-task'><Input
+                placeholder='Add a new task'
                 type="text"
                 onChange={setTask}
                 value={task}
             />
-            <button onClick={addNewTask}>Add new Task</button>
+                <button className='todo-buttons' onClick={addNewTask}>Add new Task</button></div>
+
             <ul>
                 {renderTodos()}
             </ul>

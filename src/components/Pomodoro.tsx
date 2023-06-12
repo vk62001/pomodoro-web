@@ -1,5 +1,5 @@
 import { Header } from "./Header"
-import { Todo } from "./Todo"
+import { Todo } from "./Todo/Todo"
 import { Timer } from "./Timer/Timer"
 import './styles.css'
 
