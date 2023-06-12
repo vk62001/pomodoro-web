@@ -5,20 +5,6 @@ import { getArray, setCacheArray, deleteItem } from '../cache/cache';
 
 
 export const Todo = () => {
-    const [initialTime, setInitialTime] = useState<number>(1500)
-    const { time, isRunning, setIsRunning, stopTimer, setTime } = useTimer(initialTime);
-
-    const handleChangeTimer = () => {
-        setIsRunning((prevIsRunning) => !prevIsRunning);
-    };
-
-    const handleResetTimer = () => {
-        if (stopTimer) {
-            console.log("stopTimer")
-            stopTimer();
-        }
-        // setIsRunning(true); //this makes the timer run all the time
-    };
 
     const [task, setTask] = useState<string>('');
     const [todos, setTodos] = useState<any>([]);
@@ -80,12 +66,6 @@ export const Todo = () => {
     return (
         <>
             <div>Todo</div>
-            <h1>Timer: {time} segundos</h1>
-            <button onClick={isRunning ? handleResetTimer : handleChangeTimer}>{isRunning ? 'Detener' : 'Iniciar'}</button>
-            <button onClick={handleResetTimer}>Reiniciar</button>
-            <button onClick={() => { setInitialTime(1500); setTime(1500) }}>Pomodoro</button>
-            <button onClick={() => { setInitialTime(900); setTime(900) }}>Long Time</button>
-            <button onClick={() => { setInitialTime(300); setTime(300) }}>Short Time</button>
 
             <Input
                 placeholder='Add name new task'
