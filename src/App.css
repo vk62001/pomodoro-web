@@ -24,17 +24,17 @@ body {
     justify-content: center;
 }
 
-.bg-pomo {
+.bg-1500 {
     background: #3ab1c8; 
     transition: background-color 0.5s ease-in-out 0s;
 }
 
-.bg-short {
+.bg-300 {
 	background: #5e87b8; 
     transition: background-color 0.5s ease-in-out 0s;
 }
 
-.bg-long {
+.bg-900 {
     background: #1687a7; 
     transition: background-color 0.5s ease-in-out 0s;
 }

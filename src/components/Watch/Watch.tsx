@@ -15,6 +15,6 @@ export const Watch = ({ seconds }: IWatch) => {
     }
     return (
         <div>
-            <div><p className="watch">{formatTime(seconds)}</p></div>
+            <p className="watch">{formatTime(seconds)}</p>
         </div>)
 }
