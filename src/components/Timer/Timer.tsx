@@ -33,8 +33,8 @@ export const Timer = ({ bgColour }: ITimer) => {
             }, 200);
             setResetStyleClass('button-clicked');
         }
-
     };
+
 
     const handleStopTimer = () => {
         if (stopTimer) {
@@ -71,7 +71,6 @@ export const Timer = ({ bgColour }: ITimer) => {
                 </div>
                 <div className='option'>
                     <button className={initialTime === 900 ? "button-clicked" : "button"} onClick={() => optionSetter(900)}>Long Time</button>
-
                 </div>
             </div>
             <Watch seconds={time} />
