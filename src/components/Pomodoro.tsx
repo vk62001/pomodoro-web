@@ -1,15 +1,20 @@
-import { Grid } from "@mui/material"
 import { Header } from "./Header"
-import { Todo } from "./Todo"
-import { Timer } from "./Timer"
+import { Todo } from "./Todo/Todo"
+import { Timer } from "./Timer/Timer"
+import './styles.css'
 
-export const Pomodoro = () => {
+interface IPomodoro {
+    bgColour: any
+}
+
+export const Pomodoro = ({ bgColour }: IPomodoro) => {
     return (
-        <Grid container direction={"row"} justifyContent={"center"} >
+        <div className="pomodoro">
             <Header />
-            <Timer />
+            <div className="timer-container">
+                <Timer bgColour={bgColour} />
+            </div>
             <Todo />
-        </Grid>
-
+        </div>
     )
 }

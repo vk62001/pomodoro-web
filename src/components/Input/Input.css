@@ -1,0 +1,28 @@
+input {
+    width: 50%;
+    height: 40px;
+    font-size: 16px;
+    color: white;
+    transition: color 1s;
+    /* transition: 0.6s; */
+    border: none;
+    border-bottom: 1px solid #CCC;
+    background-color: transparent;
+    &:focus {
+      outline: none;
+      transition: color 1s;
+      border-bottom: 1px solid #094444;
+     
+    }
+  }
+
+ ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #CCC;
+    transition: color 1s;
+    opacity: 1; /* Firefox */
+  }
+
+  input:focus::placeholder{
+    transition: color 1s;
+    color: #094444;
+  }
