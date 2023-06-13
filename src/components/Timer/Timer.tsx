@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Watch } from "../Watch/Watch";
 import './Timer.css';
 import useTimer from '../../CustomHook/useTimer';
@@ -15,10 +15,29 @@ export const Timer = ({ bgColour }: ITimer) => {
     const [resetStyleClass, setResetStyleClass] = useState<string>('button')
     const [buttonText, setButtonText] = useState('Start')
 
+    useEffect(() => {
+        function handleWindowResize() {
+            setWindowSize(getWindowSize());
+            console.log(windowSize)
+        }
+
+        window.addEventListener('resize', handleWindowResize);
+
+        return () => {
+            window.removeEventListener('resize', handleWindowResize);
+        };
+    }, []);
+
+
+    const getWindowSize = () => {
+        const { innerWidth, innerHeight } = window;
+        return { innerWidth, innerHeight };
+    }
+
+    const [windowSize, setWindowSize] = useState(getWindowSize());
+
     const handleStartTimer = () => {
         setIsRunning((prevIsRunning) => !prevIsRunning);
-
-        //change button style on click
         buttonStyleSetter('Pause')
 
     };
@@ -39,8 +58,6 @@ export const Timer = ({ bgColour }: ITimer) => {
     const handleStopTimer = () => {
         if (stopTimer) {
             stopTimer();
-
-            //change button style on click
             buttonStyleSetter('Start')
         }
     }
@@ -53,6 +70,7 @@ export const Timer = ({ bgColour }: ITimer) => {
     }
 
     const buttonStyleSetter = (text: string) => {
+        //change button style on click
         setTimeout(() => {
             setStartStartClass('button');
             setButtonText(text);
@@ -64,13 +82,13 @@ export const Timer = ({ bgColour }: ITimer) => {
         <div className="timer">
             <div className="options">
                 <div className='option'>
-                    <button className={initialTime === 1500 ? "button-clicked" : "button"} onClick={() => optionSetter(1500)}>Pomodoro</button>
+                    <button className={initialTime === 1500 ? "button-clicked" : "button"} onClick={() => optionSetter(1500)}>{windowSize.innerWidth > 920 ? "Pomodoro" : "Pomo"}</button>
                 </div>
                 <div className='option'>
-                    <button className={initialTime === 300 ? "button-clicked" : "button"} onClick={() => optionSetter(300)}>Short Time</button>
+                    <button className={initialTime === 300 ? "button-clicked" : "button"} onClick={() => optionSetter(300)}>{windowSize.innerWidth > 920 ? "Short Break" : "Short"}</button>
                 </div>
                 <div className='option'>
-                    <button className={initialTime === 900 ? "button-clicked" : "button"} onClick={() => optionSetter(900)}>Long Time</button>
+                    <button className={initialTime === 900 ? "button-clicked" : "button"} onClick={() => optionSetter(900)}>{windowSize.innerWidth > 920 ? "Long Break" : "Long"}</button>
 
                 </div>
             </div>
