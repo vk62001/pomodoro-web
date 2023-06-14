@@ -4,7 +4,7 @@ import { Timer } from "./Timer/Timer"
 import './styles.css'
 
 interface IPomodoro {
-    bgColour: any
+    bgColour: (value:number)=>void
 }
 
 export const Pomodoro = ({ bgColour }: IPomodoro) => {

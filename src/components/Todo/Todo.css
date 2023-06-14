@@ -24,7 +24,9 @@ li {
     font-size: 20px;
     font-weight: bolder;
     border-radius: 4px;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .todo-buttons{  

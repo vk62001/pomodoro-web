@@ -4,7 +4,7 @@ import './Timer.css';
 import useTimer from '../../CustomHook/useTimer';
 
 interface ITimer {
-    bgColour: any
+    bgColour: (value:number)=>void
 }
 
 export const Timer = ({ bgColour }: ITimer) => {

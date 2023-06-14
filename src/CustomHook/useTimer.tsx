@@ -27,16 +27,20 @@ const useTimer = (initialTime: number = 1500) => {
     playAlertSound(Click);
 
     timerId = setInterval(() => {
-      // const  prevtime = time+1;
-      // setTime(prevtime)
-      setTime((prevTime) => prevTime - 1);
-      if (time === 0) {
-        playAlertSound(TimeOver);
-      }
-    }, 1000);
+
+      setTime((prevTime) =>  { 
+        if(prevTime===1){
+          setIsRunning(false);
+          clearInterval(timerId);
+          playAlertSound(TimeOver);
+        }
+        return prevTime - 1
+      });
+    }, 30);
   };
 
   useEffect(() => {
+    console.log(time)
     if (isRunning) {
       startTimer();
     } else {

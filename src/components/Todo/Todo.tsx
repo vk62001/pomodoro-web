@@ -48,7 +48,7 @@ export const Todo = () => {
         if (arrayTaskTemp.length > 0) {
             setTodos(JSON.parse(arrayTaskTemp));
         }
-
+        localStorage.removeItem('arrayTask');
     }, [])
 
 
@@ -65,13 +65,14 @@ export const Todo = () => {
     return (
         <>
             <h1>Tasks</h1>
-            <div className='add-task'><Input
+            <div className='add-task'>
+                <Input
                 placeholder='Add a new task'
                 type="text"
                 onChange={setTask}
                 value={task}
             />
-                <button className='todo-buttons' onClick={addNewTask}>Add new Task</button></div>
+                <button className='todo-buttons' onClick={addNewTask} disabled={task.length<=0}>Add new Task</button></div>
 
             <ul>
                 {renderTodos()}
