@@ -2,28 +2,46 @@
     font-size: 50px;
 }
 
-.timer-container{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
 .pomodoro{
-    width: calc(40% - 30px);
+    width:max-content;
   }
 
   .buttons-text{
     font-size: clamp(1rem, 0.8662rem + 0.5634vw, 1.1rem);
 }
 
+.spaced{
+ margin-left: 10px;
+}
+
+.pomo, .short{
+  margin-right: 2vw;
+}
+
+@media only screen and (max-width: 350px){
+.watch {
+    font-size: 90px;
+}
+}
+
   /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
+  .watch{
+    font-size: 110px;
+    margin-left: 25px;
+    margin-right: 25px;
+  }
 
+  .long-text{
+    display: none;
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-
+  .watch{
+    font-size: 120px;
+  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */

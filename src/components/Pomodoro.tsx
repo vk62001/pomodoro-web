@@ -4,14 +4,14 @@ import { Timer } from "./Timer/Timer"
 import './styles.css'
 
 interface IPomodoro {
-    bgColour: (value:number)=>void
+    bgColour: (value: number) => void
 }
 
 export const Pomodoro = ({ bgColour }: IPomodoro) => {
     return (
         <div className="pomodoro">
             <Header />
-            <div className="timer-container">
+            <div>
                 <Timer bgColour={bgColour} />
             </div>
             <Todo />

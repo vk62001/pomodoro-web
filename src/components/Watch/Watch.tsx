@@ -1,4 +1,5 @@
 import './Watch.css'
+import '../styles.css'
 
 interface IWatch {
     seconds: number,
@@ -14,7 +15,7 @@ export const Watch = ({ seconds }: IWatch) => {
         return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
     }
     return (
-        <div>
+        <div className='watch-container'>
             <p className="watch">{formatTime(seconds)}</p>
         </div>)
 }

@@ -17,22 +17,9 @@ export const getArray = (key:string):any =>{
     return JSON.parse(value);
 };
 
-export const deleteItem = (key:string, id:any):any =>{
+export const deleteCache = (key:string):any =>{
     console.log(key);
-
-    try{
-        // const arrayTemp = localStorage.getItem(key) || '';
-        // const parsedArray = JSON.parse(arrayTemp);
-        const parsedArray = getArray(key);
-
-        const newArray = parsedArray.filter((x: any) => x.id !== id)
-
-        setCacheArray(key, newArray)
-        return newArray
-       
-    }catch(e:any){
-        console.log(e)
-    }    
+    localStorage.removeItem(key);     
 }
 
 
